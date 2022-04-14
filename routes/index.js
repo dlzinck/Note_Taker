@@ -1,6 +1,5 @@
-const path = require('path');
-
 const index = require('express').Router();
+const path = require('path');
 
 // Sends notes to the notes.html file
 index.get('/notes', (req, res) => {

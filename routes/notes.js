@@ -32,3 +32,5 @@ storage.delete('/notes/:id', (req, res) => {
     .then(() => res.json({ ok: true }))
     .catch(err => res.status(500).son(err))
 });
+
+module.exports = notes;
