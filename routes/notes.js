@@ -4,7 +4,7 @@ const storage = require('../db/storage.js')
 // Requesting the existing notes from previous sessions
 notes.get('/notes', (req, res) =>{
     storage
-    .getNotes()
+    .getNote()
     .then(notes => {
         res.json(notes);
     })
@@ -26,11 +26,11 @@ notes.post('/notes', (req, res) => {
 });
 
 // Deleting the note function route
-storage.delete('/notes/:id', (req, res) => {
+notes.delete('/notes/:id', (req, res) => {
     storage
     .removeNote(req.params.id)
     .then(() => res.json({ ok: true }))
-    .catch(err => res.status(500).son(err))
+    .catch(err => res.status(500).json(err))
 });
 
 module.exports = notes;

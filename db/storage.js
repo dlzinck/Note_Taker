@@ -9,13 +9,16 @@ class Storage {
     read(){
         return readFileAsync('db/db.json', 'utf8')
     }
+    write(note){
+        return writeFileAsync('db/db.json', JSON.stringify(note))
+    }
     addNote(note){
         const { title, text} = note
         if (!title || !text){
             throw new Error('Title and text can not be blank!')
         }
         const newNote = { title, text, id: uuid() }
-        return this.getNotes()
+        return this.getNote()
         .then(notes => [...notes, newNote])
         .then(updatedNotes => this.write(updatedNotes))
         .then (() => this,newNote)
@@ -27,7 +30,7 @@ class Storage {
         })
     }
     removeNote(id){
-        return this.getNotes()
+        return this.getNote()
         .then(notes => notes.filter(note => note.id !== id))
         .then(storedNotes => this.write(storedNotes))
     }
